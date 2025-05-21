@@ -1,0 +1,41 @@
+{
+  "name": "seda-dashboard",
+  "version": "1.0.0",
+  "description": "Dashboard for tracking SEDA testnet transactions",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "keywords": [
+    "seda",
+    "blockchain",
+    "dashboard",
+    "transactions"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "axios": "^1.9.0",
+    "dayjs": "^1.11.13",
+    "ethers": "^6.14.1",
+    "framer-motion": "^11.0.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "recharts": "^2.15.3"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
+    "@vitejs/plugin-react": "^4.2.1",
+    "gh-pages": "^6.3.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.1.3"
+  }
+}
