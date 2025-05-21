@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import { Box, Flex, Heading, Image, Text } from '@chakra-ui/react'
 
 export default function Header() {
@@ -12,7 +13,7 @@ export default function Header() {
       mb={8}
     >
       <Flex align="center">
-        <Image src={`${import.meta.env.BASE_URL}assets/seda-logo.svg`} alt="SEDA Logo" h="40px" mr={4} />
+        <Image src="https://cdn.prod.website-files.com/672ce6bb6218cb69510f13e8/675b12e267dc6bc37ce28c83_SEDA%20Logo%20White%20(1).svg" alt="SEDA Logo" h="40px" mr={4} />
         <Heading as="h1" fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }} color="white" fontWeight="extrabold" letterSpacing="wide">
           Transaction Dashboard
         </Heading>
