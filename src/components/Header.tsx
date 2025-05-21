@@ -12,7 +12,7 @@ export default function Header() {
       mb={8}
     >
       <Flex align="center">
-        <Image src="/src/assets/seda-logo.svg" alt="SEDA Logo" h="40px" mr={4} />
+        <Image src={`${import.meta.env.BASE_URL}assets/seda-logo.svg`} alt="SEDA Logo" h="40px" mr={4} />
         <Heading as="h1" fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }} color="white" fontWeight="extrabold" letterSpacing="wide">
           Transaction Dashboard
         </Heading>
