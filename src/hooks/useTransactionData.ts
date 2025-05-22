@@ -10,7 +10,7 @@ interface TransactionData {
 
 const DEFAULT_RPC_URL = 'https://rpc.testnet.seda.xyz'
 const BATCH_SIZE = 50 // Number of blocks to fetch in each batch
-const MAX_BLOCKS = 25000 // Try to fetch enough blocks to cover recent history
+const MAX_BLOCKS = 10000 // Fetch only the latest 10,000 blocks
 const HOURS_WINDOW = 30 // 30 hours
 
 function getCacheKey(rpcUrl: string) {
@@ -59,15 +59,17 @@ export function useTransactionData(rpcUrl: string = DEFAULT_RPC_URL) {
 
     try {
       const latestHeight = await getLatestBlockHeight(rpcUrl)
+      // Start from the latest block and go backwards
       const startHeight = Math.max(1, latestHeight - MAX_BLOCKS + 1)
       let blockData: { timestamp: number; transactionCount: number }[] = []
       const totalBatches = Math.ceil((latestHeight - startHeight + 1) / BATCH_SIZE)
       let cumulative = 0
 
-      for (let i = startHeight, batchNum = 0; i <= latestHeight; i += BATCH_SIZE, batchNum++) {
-        const end = Math.min(i + BATCH_SIZE - 1, latestHeight)
+      // Process blocks in reverse order (newest first)
+      for (let i = latestHeight, batchNum = 0; i >= startHeight; i -= BATCH_SIZE, batchNum++) {
+        const batchStart = Math.max(startHeight, i - BATCH_SIZE + 1)
         const batchPromises = []
-        for (let h = i; h <= end; h++) {
+        for (let h = i; h >= batchStart; h--) {
           batchPromises.push(getBlockData(rpcUrl, h))
         }
         const batchResults = await Promise.all(batchPromises)
@@ -75,7 +77,7 @@ export function useTransactionData(rpcUrl: string = DEFAULT_RPC_URL) {
         setProgress((batchNum + 1) / totalBatches)
       }
 
-      // Sort by timestamp
+      // Sort by timestamp (oldest first)
       blockData.sort((a, b) => a.timestamp - b.timestamp)
 
       // Aggregate: keep only the last block of each day
