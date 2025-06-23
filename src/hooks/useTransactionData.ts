@@ -10,8 +10,8 @@ interface TransactionData {
 
 const DEFAULT_RPC_URL = 'https://rpc.testnet.seda.xyz'
 const BATCH_SIZE = 50 // Number of blocks to fetch in each batch
-const MAX_BLOCKS = 10000 // Fetch only the latest 10,000 blocks
-const HOURS_WINDOW = 30 // 30 hours
+const MAX_BLOCKS = 300000 // Fetch enough blocks to cover ~30 days
+const HOURS_WINDOW = 24 * 30 // 30 days
 
 function getCacheKey(rpcUrl: string) {
   return `seda-tx-daily-cache-${rpcUrl}`
